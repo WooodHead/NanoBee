@@ -2,13 +2,17 @@
 
 ## pre-commit
 
-- **文件职责**：阻止 `private/`（私密嵌套仓库）下的任何文件被提交到公开主仓库，作为 `.gitignore` 之外的第二道保险（防 `git add -f`）。
-- **依赖关系**：无外部依赖，纯 POSIX sh。需手动安装到 `.git/hooks/pre-commit` 才生效（`.git/hooks` 不被 git 跟踪，克隆后需重新安装）。
-- **安装**：`cp scripts/git-hooks/pre-commit .git/hooks/pre-commit && chmod +x .git/hooks/pre-commit`
+- **Responsibility**: blocks any file under `private/` (the nested private repo) from being committed to the public main repo, acting as a second safety net beyond `.gitignore` (guards against `git add -f`).
+- **Dependencies**: none — pure POSIX sh. Must be installed manually into `.git/hooks/pre-commit` to take effect (`.git/hooks` is not tracked by git, so it has to be reinstalled after cloning).
+- **Install**: `cp scripts/git-hooks/pre-commit .git/hooks/pre-commit && chmod +x .git/hooks/pre-commit`
 
-## 变更历史
+## Change history
 
-### 2026-06-12 — 创建
-- **出发点**：NanoBee 计划开源，但聊天历史 / 项目规划等私密内容需要放在主目录内供 AI 读取，同时绝不能进入公开 git 历史
-- **目标**：在 `.gitignore` 忽略 `/private/` 的基础上，加一道 pre-commit 强制拦截，防止误用 `git add -f` 泄露
-- **关键决策**：hook 源文件存放在 `scripts/git-hooks/` 随仓库版本化，安装时复制到 `.git/hooks/`（不使用 `core.hooksPath`，避免改 git config）
+### 2026-06-12 — Created
+- **Motivation**: NanoBee is going open source, but private content (chat history, project planning, etc.) needs to stay inside the working directory so AI can read it, while never entering the public git history.
+- **Goal**: on top of `.gitignore` ignoring `/private/`, add a mandatory pre-commit barrier to prevent accidental leaks via `git add -f`.
+- **Key decision**: keep the hook source versioned under `scripts/git-hooks/` and copy it into `.git/hooks/` on install (no `core.hooksPath`, to avoid touching git config).
+
+### 2026-06-12 — Translated to English
+- **Motivation**: this is a public repository; per the language rules in `CLAUDE.md`, all public comments and docs must be in English (Chinese content lives only under `private/`).
+- **Goal**: translate the hook's comments/messages and this doc to English without changing behavior.
