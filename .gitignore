@@ -25,3 +25,6 @@ logs/*.log
 /*.png
 build
 .build
+
+# 私密内容（独立私有仓库 NanoBee_Private，禁止提交到公开主仓库）
+/private/
